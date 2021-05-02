@@ -5,7 +5,7 @@ Creating an Authentication API with Golang
 
 [![GoDoc](https://pkg.go.dev/badge/github.com/gin-gonic/gin?status.svg)](https://pkg.go.dev/github.com/gin-gonic/gin?tab=doc)
 
-# Installation
+# Installation (ref: Dijkhuizen)
 
 You need to install Go on your PC or MacOS and set your Go workspace first
 
@@ -90,3 +90,80 @@ listenPort := "1357"
 router.Run(":"+listenPort)
 }
 ```
+
+- passing the query string parameters
+
+```go
+func main() {
+  router := gin.Default()
+subRouterAuthenticated := router.Group("/api/v1/PersonId", gin.BasicAuth(gin.Accounts{
+    "admin": "adminpass",
+  }))
+subRouterAuthenticated.GET("/:IdValue", GetMethod)
+listenPort := "1357"
+  router.Run(":"+listenPort)
+}
+```
+
+# Adjusting our GetMethod()
+
+- It fetches and prints the Person `IdValue` from the query string parameter passed in the API URL:
+
+```go
+
+func GetMethod(c *gin.Context) {
+  fmt.Println("\n'GetMethod' called")
+  IdValue := c.Params.ByName("IdValue")
+  message := "GetMethod Called With Param: " + IdValue
+  c.JSON(http.StatusOK, message)
+ReqPayload := make([]byte, 1024)
+  ReqPayload, err := c.GetRawData()
+  if err != nil {
+        fmt.Println(err)
+        return
+  }
+  fmt.Println("Request Payload Data: ", string(ReqPayload))
+}
+```
+#
+
+# For efficient practice check my `main.go` file
+
+# Testing With ngrok
+
+- First, run your Go application
+
+```sh
+go run main.go
+```
+
+1. Download [ngrok](https://dl.equinox.io/ngrok/ngrok/stable)
+2. Extract the ngrok executable in a folder on your server.
+3. Start ngrok on port `1357` (which is the port you selected in your code).
+
+```sh
+./ngrok http 1357
+```
+
+- The result:
+
+```sh
+ngrok by @emmyc                                               (Ctrl+C to quit)
+Session Status                online                                                         
+Session Expires               7 hours, 12 minutes                                            
+Version                       2.3.35                                                         
+Region                        Netherlands (nl)                                             
+Web Interface                 http://127.0.0.1:4040                                          
+Forwarding                    http://ca6d2c4cee3e.ngrok.io -> http://localhost:4000          
+Forwarding                    https://ca6d2c4cee3e.ngrok.io -> http://localhost:4000
+```
+
+- This will generate a random dynamic URL where you can test your API and log in with your login details to test if it works.
+
+- After you log in, it will show:
+
+```sh
+GetMethod Called With Param: Id456
+```
+
+- Great It works!
