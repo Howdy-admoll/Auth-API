@@ -16,4 +16,7 @@ func GetMethod(c *gin.Context) {
 }
 func main() {
   router := gin.Default()
+  
+  router.POST("/", PostMethod)
+  router.GET("/", GetMethod)
 }
