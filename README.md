@@ -140,6 +140,7 @@ go run main.go
 1. Download [ngrok](https://dl.equinox.io/ngrok/ngrok/stable)
 2. Extract the ngrok executable in a folder on your server.
 3. Start ngrok on port `1357` (which is the port you selected in your code).
+- p.s you can configure your port
 
 ```sh
 ./ngrok http 1357
