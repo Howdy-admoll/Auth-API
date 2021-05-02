@@ -59,3 +59,34 @@ router.POST("/", PostMethod)
   router.GET("/", GetMethod)
 }
 ```
+- we add the port for the server to listen to and run the server: Just top the below code in `Gin`
+
+```go
+func main() {
+  router := gin.Default()
+router.POST("/", PostMethod)
+  router.GET("/", GetMethod)
+listenPort := "4000"
+router.Run(":"+listenPort)
+}
+```
+- Now, run this code to test if your server is working.
+
+#
+
+# Authentication
+
+- Now that you’ve set up our basic web server, we can start adding in the elements for our authentication API.
+
+- let's start with `func main()`:
+
+```go
+func main() {
+  router := gin.Default()
+subRouterAuthenticated := router.Group("/api/v1/PersonId", gin.BasicAuth(gin.Accounts{
+    "admin": "adminpass",
+  }))
+listenPort := "1357"
+router.Run(":"+listenPort)
+}
+```
