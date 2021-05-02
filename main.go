@@ -19,4 +19,6 @@ func main() {
   
   router.POST("/", PostMethod)
   router.GET("/", GetMethod)
+ listenPort := "4000"
+router.Run(":"+listenPort)
 }
