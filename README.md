@@ -72,7 +72,6 @@ router.Run(":"+listenPort)
 ```
 - Now, run this code to test if your server is working.
 
-#
 
 # Authentication
 
