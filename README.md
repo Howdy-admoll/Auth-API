@@ -5,7 +5,7 @@ Creating an Authentication API with Golang
 
 [![GoDoc](https://pkg.go.dev/badge/github.com/gin-gonic/gin?status.svg)](https://pkg.go.dev/github.com/gin-gonic/gin?tab=doc)
 
-# Installation (ref: Dijkhuizen)
+# Installation (ref: Thank to ==> Dijkhuizen)
 
 You need to install Go on your PC or MacOS and set your Go workspace first
 
